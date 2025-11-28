@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5" style="max-width: 600px;">
+    <h2 class="mb-4 text-center" style="color: #003478;">Finalizar Compra</h2>
+    <div class="card p-4 shadow-sm">
+        <h4 class="mb-3">Total a Pagar: ${{ total }}</h4>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Método de Pago</label>
+                <select class="form-select" name="metodo_pago" id="metodo" onchange="toggleCard()" required>
+                    <option value="Efectivo">Efectivo (Pago en agencia)</option>
+                    <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
+                </select>
+            </div>
+            
+            <div class="mb-3" id="card-info" style="display: none;">
+                <label class="form-label">Número de Tarjeta (Ficticio)</label>
+                <input type="text" name="tarjeta" class="form-control" placeholder="0000 0000 0000 0000">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3" style="background-color: #003478;">PAGAR AHORA</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleCard() {
+        var metodo = document.getElementById("metodo").value;
+        var cardInfo = document.getElementById("card-info");
+        if (metodo === "Tarjeta") {
+            cardInfo.style.display = "block";
+        } else {
+            cardInfo.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

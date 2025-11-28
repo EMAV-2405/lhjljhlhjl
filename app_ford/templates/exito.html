@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="card p-5 shadow border-0" style="max-width: 600px; margin: 0 auto;">
+        <div class="mb-4">
+            <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+        </div>
+        <h2 class="fw-bold mb-3" style="color: #003478;">Su compra fue exitosa</h2>
+        <p class="text-muted">Gracias por confiar en Ford México. Hemos registrado su apartado.</p>
+        <a href="{% url 'inicio' %}" class="btn btn-primary mt-3" style="background-color: #003478;">Volver al Inicio</a>
+    </div>
+</div>
+{% endblock %}

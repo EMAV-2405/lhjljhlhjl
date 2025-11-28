@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="position-relative text-center bg-white" style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-start">
+                <h1 class="display-3 fw-bold" style="color: #003478;">NUEVOS MODELOS</h1>
+                {% if destacado %}
+                    <a href="{% url 'agregar_carrito' 'deportivo' destacado.id_deportivo %}" class="btn btn-primary btn-lg mt-3 px-5 py-2" style="background-color: #003478;">COMPRAR</a>
+                {% else %}
+                    <p>Próximamente</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if destacado %}
+                <img src="{{ destacado.imagen_url }}" class="img-fluid" alt="Mustang">
+                {% else %}
+                <img src="https://media.ford.com/content/dam/fordmedia/North%20America/US/2022/09/14/2024-Ford-Mustang-Dark-Horse-02.jpg" class="img-fluid">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

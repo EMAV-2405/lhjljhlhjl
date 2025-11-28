@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 fw-bold" style="color: #003478;">{{ titulo }}</h2>
+    
+    <div class="row">
+        {% for auto in autos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="{{ auto.imagen_url }}" class="card-img-top p-3" alt="{{ auto.nombre }}" style="object-fit: contain; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="color: #003478;">{{ auto.nombre }}</h5>
+                    <p class="card-text small text-muted">
+                        Año: {{ auto.anio }}<br>
+                        Color: {{ auto.color }}<br>
+                        Motor: {{ auto.motor }}
+                    </p>
+                    <h5 class="fw-bold text-dark">${{ auto.precio }} MXN</h5>
+                    
+                    {% if tipo == 'suv' %}
+                        <a href="{% url 'agregar_carrito' tipo auto.id_suv %}" class="btn btn-primary w-100 mt-2" style="background-color: #003478;">Ver más / Comprar</a>
+                    {% elif tipo == 'deportivo' %}
+                        <a href="{% url 'agregar_carrito' tipo auto.id_deportivo %}" class="btn btn-primary w-100 mt-2" style="background-color: #003478;">Ver más / Comprar</a>
+                    {% else %}
+                        <a href="{% url 'agregar_carrito' tipo auto.id_pickup %}" class="btn btn-primary w-100 mt-2" style="background-color: #003478;">Ver más / Comprar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay vehículos disponibles en esta categoría.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

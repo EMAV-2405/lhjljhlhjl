@@ -1,0 +1,27 @@
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.text-primary {
+    color: #003478 !important; /* Ford Blue */
+}
+
+.nav-link {
+    color: #003478 !important;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #0055aa !important;
+}
+
+.btn-primary {
+    background-color: #003478;
+    border-color: #003478;
+}
+
+.btn-primary:hover {
+    background-color: #002a60;
+}

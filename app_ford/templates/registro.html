@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg border-0" style="width: 100%; max-width: 500px;">
+        <div class="card-header text-white text-center py-3" style="background-color: #003478;">
+            <h4 class="mb-0 fw-bold">CREAR CUENTA</h4>
+        </div>
+        <div class="card-body p-4">
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Loop para renderizar el formulario de Django con estilos -->
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">{{ field.label }}</label>
+                    <!-- Añadimos clase form-control al vuelo usando CSS o un div wrapper -->
+                    <div class="input-group">
+                        {{ field }} 
+                    </div>
+                    {% if field.help_text %}
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary fw-bold py-2" style="background-color: #003478;">REGISTRARSE</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="small text-muted">¿Ya tienes cuenta?</p>
+                <a href="{% url 'login' %}" class="text-decoration-none fw-bold" style="color: #003478;">
+                    Inicia Sesión aquí
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script pequeño para estilizar los inputs que genera Django automáticamente -->
+<script>
+    // Selecciona todos los inputs del formulario y les agrega la clase de Bootstrap
+    var inputs = document.querySelectorAll('input');
+    inputs.forEach(function(input) {
+        input.classList.add('form-control');
+    });
+</script>
+{% endblock %}

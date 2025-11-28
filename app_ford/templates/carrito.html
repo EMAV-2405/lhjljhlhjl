@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4" style="color: #003478;">Carrito de Compras</h2>
+    {% if carrito %}
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cant.</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, item in carrito.items %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.imagen }}" width="80" class="me-2 rounded">
+                            {{ item.nombre }}
+                        </td>
+                        <td>${{ item.precio }}</td>
+                        <td>{{ item.cantidad }}</td>
+                        <td>${% widthratio item.precio 1 item.cantidad %}</td>
+                        <td>
+                            <a href="{% url 'eliminar_carrito' key %}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end align-items-center mt-3">
+            <h4 class="me-4">Total: ${{ total }}</h4>
+            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">Proceder al Pago</a>
+        </div>
+    {% else %}
+        <div class="alert alert-info">Tu carrito está vacío. <a href="{% url 'suvs' %}">Ver modelos</a></div>
+    {% endif %}
+</div>
+{% endblock %}

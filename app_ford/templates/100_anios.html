@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid bg-white p-0">
+    {% if auto %}
+    <div class="row g-0">
+        <div class="col-md-8 bg-danger d-flex align-items-center justify-content-center p-5">
+            <img src="{{ auto.imagen_url }}" class="img-fluid shadow-lg rounded" alt="100 Años">
+        </div>
+        <div class="col-md-4 p-5">
+            <h2 class="fw-bold mb-3" style="color: #003478;">{{ auto.nombre }}</h2>
+            <p>Celebrando un siglo de historia en México, presentamos esta edición limitada.</p>
+            
+            <h5 class="fw-bold mt-4" style="color: #003478;">Ficha Técnica</h5>
+            <ul class="list-unstyled">
+                <li><strong>Motor:</strong> {{ auto.motor }}</li>
+                <li><strong>Color:</strong> {{ auto.color }}</li>
+                <li><strong>Rines:</strong> {{ auto.rines }}</li>
+                <li><strong>Interior:</strong> {{ auto.interior }}</li>
+                <li><strong>Emblemas:</strong> {{ auto.emblemas }}</li>
+            </ul>
+            
+            <h3 class="mt-4">${{ auto.precio }} MXN</h3>
+
+            {% if auto.disponible %}
+                <a href="{% url 'agregar_carrito' '100anios' auto.id_aniversario %}" class="btn btn-primary btn-lg mt-3 w-100" style="background-color: #003478;">Apartar Ahora</a>
+            {% else %}
+                <button class="btn btn-secondary btn-lg mt-3 w-100" disabled>Agotado</button>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <h3>Edición Centenario no configurada en Administración.</h3>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

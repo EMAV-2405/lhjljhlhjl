@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg border-0" style="width: 100%; max-width: 400px;">
+        <div class="card-header text-white text-center py-3" style="background-color: #003478;">
+            <h4 class="mb-0 fw-bold">INICIAR SESIÓN</h4>
+        </div>
+        <div class="card-body p-4">
+            <!-- Mensajes de error si las credenciales fallan -->
+            {% if form.errors %}
+                <div class="alert alert-danger text-center mb-3 p-2 small">
+                    Usuario o contraseña incorrectos.
+                </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                
+                <!-- Renderizado manual para aplicar estilos Bootstrap -->
+                <div class="mb-3">
+                    <label for="id_username" class="form-label fw-bold text-muted">Nombre de Usuario</label>
+                    <input type="text" name="username" class="form-control py-2" id="id_username" placeholder="Ingresa tu usuario" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_password" class="form-label fw-bold text-muted">Contraseña</label>
+                    <input type="password" name="password" class="form-control py-2" id="id_password" placeholder="********" required>
+                </div>
+
+                <!-- Input oculto para redireccionar después del login si es necesario -->
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary fw-bold py-2" style="background-color: #003478;">ENTRAR</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="small text-muted">¿Aún no tienes cuenta?</p>
+                <a href="{% url 'registro' %}" class="text-decoration-none fw-bold" style="color: #003478;">
+                    Regístrate aquí
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
